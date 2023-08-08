@@ -39,7 +39,7 @@ Scaffold::Scaffold() : IModule(0, Category::PLAYER, "Places blocks under you") {
 	diagType.addEntry("IDK", 3);
 	diagType.addEntry("NoSpeed", 4);
 	diagType.addEntry("UpBlock", 5);
-	registerEnumSetting("Counter:", &blocleft, 0);/////
+	registerEnumSetting("Counter", &blocleft, 0);/////
 	blocleft.addEntry("Off", 0);
 	blocleft.addEntry("Zephyr", 1);
 	blocleft.addEntry("Packet", 2);
