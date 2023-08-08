@@ -8,7 +8,7 @@ uintptr_t HiveRotations4 = Utils::getBase() + 0x98AF833C1;
 uintptr_t HiveRotations5 = Utils::getBase() + 0x173ACFA01D; //From Skidders
 int testextend = 0;
 int radiumdelay = 0;
-//a
+//THE J WTF
 using namespace std;
 Scaffold::Scaffold() : IModule(0, Category::PLAYER, "Places blocks under you") {
 	registerEnumSetting("Rotations", &rotations, 0);
