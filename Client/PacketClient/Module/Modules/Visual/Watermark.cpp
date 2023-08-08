@@ -7,7 +7,7 @@ Watermark::Watermark() : IModule(0, Category::VISUAL, "Displays the watermark") 
 	registerEnumSetting("Theme", &mode, 0);
 	mode.addEntry("Simple", 0);
 	mode.addEntry("New", 1);
-	mode.addEntry("Weird", 2);
+	mode.addEntry("BMS", 2);
 	mode.addEntry("Skeet", 3);
 	//mode.addEntry("FirstLetter", 4);
 	//mode.addEntry("Radium", 5);
@@ -45,17 +45,18 @@ void Watermark::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 		resetname = false;
 	}
 	if (g_Data.canUseMoveKeys() && !clickGUI->hasOpenedGUI) {
-		string name = player->getNameTag()->getText();
+		string name = player->getNameTag()->getText(); name = Utils::sanitize(name); name = name.substr(0, name.find('\n')); 
+		string fpsText2 = string(GRAY) + "[" + string(RESET) + to_string(g_Data.getFPS()) + string(GRAY) + "]";
 		name = Utils::sanitize(name);
 		name = name.substr(0, name.find('\n'));
 		string clientName = interfaceMod->getClientName();
 		string fpsText = to_string(g_Data.getFPS()) + " fps";
 		string skeetLen = "Actiniumsense | " + name + " | " + fpsText; string t = "Actinium         | " + name + " | " + fpsText; string sense = "sense";
 		string newText = clientName + GRAY + "| " + RESET + WHITE + name;
-		string idk = "Actinium";
+		string idk = "B";
 		string idk2 = string(GRAY) + clientName;
 		string len = idk + idk2; // why u lookin over here
-		string cn = "Actinium";
+		string cn = "ig Money Sex Client";
 		float textHeight = 12.f * scale;
 		float textPadding = 1.f * scale;
 
@@ -93,8 +94,8 @@ void Watermark::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 			break;
 		case 2: // Weird
 			DrawUtils::drawGradientText(vec2_t(simpleRect.x, simpleRect.y), &idk, scale, 1, true);
-			//DrawUtils::drawGradientText(vec2_t(simpleRect.x + flaot, simpleRect.y - 5), &idk, scale/2, 1, true);
-			DrawUtils::drawText(vec2_t(simpleRect.x + flaot - 5, simpleRect.y - 5), &idk2, MC_Color(), 1, 1, true);
+			DrawUtils::drawText(vec2_t(simpleRect.x + flaot + (textPadding * 2), simpleRect.y - 5), &idk2, MC_Color(), 1, 1, true);
+			DrawUtils::drawText(vec2_t(simpleRect.x + 34, simpleRect.y), &fpsText2, interfaceColor, scale, 1, true);
 			break;
 		case 3: // Skeet
 			DrawUtils::fillRectangle(skeetRect, MC_Color(27, 27, 27), 1);
