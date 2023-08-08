@@ -215,7 +215,7 @@ void ClickGui::renderTenacityNew() {
 	DrawUtils::fillRectangle(categoryRect, MC_Color(39, 39, 39), true);
 	int categoryOffsetY = topOffset + 19;
 	DrawUtils::fillRectangle(vec4_t(categoryRect.x + 4, categoryOffsetY, categoryRect.z - 4, categoryOffsetY + 1), MC_Color(62, 62, 62), 1.f);
-	DrawUtils::drawCenteredString(vec2_t((categoryRect.z + categoryRect.x) / 2, categoryRect.y + 8), &(string)"Actinium", 1.f, MC_Color(255, 255, 255), true);
+	DrawUtils::drawCenteredString(vec2_t((categoryRect.z + categoryRect.x) / 2, categoryRect.y + 8), &(string)"BMS", 1.f, MC_Color(255, 255, 255), true);
 	DrawUtils::drawCenteredString(vec2_t((categoryRect.z + categoryRect.x) / 2, categoryRect.y + 17), &interfaceMod->versionStr, 0.6f, MC_Color(255, 255, 255), true);
 	categoryOffsetY += 2;
 	vector<Category> categories = { Category::COMBAT,Category::MOVEMENT,Category::VISUAL,Category::PLAYER,Category::EXPLOIT,Category::OTHER };
@@ -996,7 +996,7 @@ void ClickGui::renderLunarCategory() {
 	DrawUtils::drawRectangle(vec4_t(rect1.x - 0.5, rect1.y - 0.5, rect1.z + 0.5, rect1.w + 0.5), MC_Color(100, 100, 100), 0.2, 1.0f);
 	DrawUtils::fillRectangle(rect1, MC_Color(0, 0, 0), 0.5f);
 	DrawUtils::fillRectangle(vec4_t(leftOffset, topOffset, rightOffset, topOffset + 20), MC_Color(0, 0, 0), 0.5f);
-	DrawUtils::drawGradientText(vec2_t(leftOffset + 6, topOffset + 6), &(string)"Actinium Client", 1.25f);
+	DrawUtils::drawGradientText(vec2_t(leftOffset + 6, topOffset + 6), &(string)"BMS Client", 1.25f);
 	vec4_t configRect = vec4_t(leftOffset, topOffset + 30, leftOffset + 60, bottomOffset);
 	vec2_t mousePos = *g_Data.getClientInstance()->getMousePos();
 	{
@@ -6043,7 +6043,7 @@ void ClickGui::rendertenaCategory(Category category) {///
 			//Draw a bit more then just the HudEditor button
 			{
 				std::vector<SettingEntry*>* settings = clickGUI->getSettings();
-				string textStr = "Actinium";
+				string textStr = "BMS";
 				float textStrLen = DrawUtils::getTextWidth(&string("------------")) - 2.f;
 				float textStrLen2 = DrawUtils::getTextWidth(&string("--------------"));
 				float stringLen = DrawUtils::getTextWidth(&textStr) + 2;
@@ -6330,7 +6330,7 @@ void ClickGui::renderNewCategory(Category category) {
 	//DrawUtils::drawRoundRectangle(vec4_t(windowSize2.x / 2 - (35 * yoko), windowSize2.y / 2 - (8 * tate), windowSize2.x / 2 - (35 * yoko) + 1 + DrawUtils::getTextWidth(&ltx, 1.f, Fonts::SMOOTH), windowSize2.y / 2 + (8 * tate)), MC_Color(255, 255, 255),true);
 	zrs = 25;
 	zrsx = 4;
-	DrawUtils::drawText(vec2_t(windowSize2.x / 2 - (35 * yoko) + 1 + zrsx - 1, windowSize2.y / 2 - (8 * tate) + 05), &string("Actinium"), MC_Color(0, 170, 0), 2.f, 1.f, true);
+	DrawUtils::drawText(vec2_t(windowSize2.x / 2 - (35 * yoko) + 1 + zrsx - 1, windowSize2.y / 2 - (8 * tate) + 05), &string("BMS"), MC_Color(0, 170, 0), 2.f, 1.f, true);
 	DrawUtils::drawText(vec2_t(windowSize2.x / 2 - (35 * yoko) + 1 + zrsx, windowSize2.y / 2 - (8 * tate) + 00 + zrs), &string("   Combat"), MC_Color(255, 255, 255));
 	DrawUtils::drawText(vec2_t(windowSize2.x / 2 - (35 * yoko) + 1 + zrsx, windowSize2.y / 2 - (8 * tate) + 10 + zrs), &string("   Render"), MC_Color(255, 255, 255));
 	DrawUtils::drawText(vec2_t(windowSize2.x / 2 - (35 * yoko) + 1 + zrsx, windowSize2.y / 2 - (8 * tate) + 20 + zrs), &string("   Movement"), MC_Color(255, 255, 255));
@@ -8139,7 +8139,7 @@ void ClickGui::renderNewBadLion() {
 	}
 	//
 
-	DrawUtils::drawText(vec2_t(clickGUIRect.x + 10, clickGUIRect.y - 20), &string("Actinium"), MC_Color(255, 255, 255), 1.4f, 1.f, true);
+	DrawUtils::drawText(vec2_t(clickGUIRect.x + 10, clickGUIRect.y - 20), &string("BMS"), MC_Color(255, 255, 255), 1.4f, 1.f, true);
 	vec2_t textPos = vec2_t(clickGUIRect.x + 92, clickGUIRect.y + 9);
 
 	DrawUtils::fillRectangleA(clickGUIRect, MC_Color(0, 0, 0, 40));

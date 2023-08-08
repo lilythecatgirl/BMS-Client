@@ -626,8 +626,8 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 			string remove = gray + "[-] " + string(RESET);
 			string fix = gray + "[*] " + string(RESET);
 
-			string changeLog = (gray + bold + string("ActiniumClient-Release") + ": \n" + RESET +
-				gray + bold + "Release Build 4: \n" + RESET +
+			string changeLog = (gray + bold + string("BMS Client") + ": \n" + RESET +
+				gray + bold + "Release Build 1: \n" + RESET +
 				gray + bold + "Base Credits \n" + RESET +
 				"Packet \n" +
 				"Deq \n" +
@@ -637,7 +637,7 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 				"z98#3636 \n" +
 				"\n" +
 				gray + bold + "Other Credits \n" + RESET +
-				"daydreaminq \n" +
+				"Lilycat for this fork and fixing all the bugs in actinium \n" +
 				"\n" +
 				gray + bold + "Developers(Actinium) \n" + RESET +
 				"DarkNBTHax \n" +
