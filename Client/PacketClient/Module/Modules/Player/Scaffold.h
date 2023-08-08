@@ -17,7 +17,7 @@ private:
 	bool towerOnlyNoMove = false;
 	bool foundBlock = false;
 	bool blockCount = true;
-	bool showExposed = true;
+	bool showExposed = false;
 	bool movedx = false;
 	bool movedz = false;
 	bool speedwasenabled = false;
@@ -78,7 +78,7 @@ public:
 	float Range = 4;
 	float scY = 20.f;
 	float scX = 10.f;
-	int extend = 1;
+	float extend = 1;
 	int minetime = 15;
 	int groundtime = 0;
 	int groundtime2 = 0;
@@ -89,9 +89,9 @@ public:
 	bool lockY = false;
 	bool canspoof = false;
 	bool downmode = false;
-	bool alwaysUnderPlace = true;
+	bool alwaysUnderPlace = false;
 	bool spoof = false;
-
+	SettingEnum downwards = this;
 	std::vector<vec3_t> placed;
 	std::vector<vec3_ti> highlightCity;
 	std::vector<vec3_t> exposee;
