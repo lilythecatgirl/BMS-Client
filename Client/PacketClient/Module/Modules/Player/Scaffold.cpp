@@ -955,7 +955,11 @@ void Scaffold::onDisable() {
 	auto sprint = moduleMgr->getModule<Sprint>();
 	auto speedMod = moduleMgr->getModule<Speed>();
 	sprint->useSprint = true;
-
+	vec3_t position;
+	if (zipline) {
+		auto player = g_Data.getLocalPlayer();
+		player->setPos(position);
+	}
 	auto player = g_Data.getLocalPlayer();
 	if (player == nullptr) return;
 	if (firstlock) lockY = true;
