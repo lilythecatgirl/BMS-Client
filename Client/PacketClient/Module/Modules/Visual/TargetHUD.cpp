@@ -15,7 +15,6 @@ TargetHUD::TargetHUD() : IModule(0, Category::VISUAL, "Displays information abou
 	mode.addEntry("Rise", 8);
 	mode.addEntry("jd", 9);
 	mode.addEntry("HvH", 10);
-	mode.addEntry("MoonOld", 11);
 	registerBoolSetting("Animation", &animation, animation);
 	registerBoolSetting("Items", &showItems, showItems);
 	registerIntSetting("Opacity", &opacity, opacity, 0, 255);
@@ -29,7 +28,7 @@ static bool entityChanged = false;
 static vector<C_Entity*> targetList;
 void findPlayers_TargetHUD(C_Entity* currentEntity, bool isRegularEntity) {
 	if (currentEntity == nullptr) return;
-//	if (currentEntity == g_Data.getLocalPlayer()) return;
+	//	if (currentEntity == g_Data.getLocalPlayer()) return;
 	if (!g_Data.getLocalPlayer()->canAttack(currentEntity, false)) return;
 	if (!g_Data.getLocalPlayer()->isAlive()) return;
 	if (!currentEntity->isAlive()) return;
@@ -85,7 +84,7 @@ void TargetHUD::onTick(C_GameMode* gm) {
 		size = 30.f;
 		animationsize = 0.f;
 	}
-		if (mode.getSelectedValue() == 10) {
+	if (mode.getSelectedValue() == 10) {
 		showItems = false;//lol
 	}
 }
@@ -108,7 +107,7 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 				positionX += ((windowSize.x / 2 + 10) - positionX) * 0.045f; positionY += ((windowSize.y / 2 + 10) - positionY) * 0.045f;
 			}
 		}
-		else { 
+		else {
 			positionX = windowSize.x / 2 + 10; positionY = windowSize.y / 2 + 10;
 		}
 
@@ -119,7 +118,6 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 			vec3_t* pos = targetList[0]->getPos();
 			auto health = targetList[0]->getHealth();
 			int inthealth = health;
-			int healthcolor = inthealth * 12.75;
 			float Absorbtionhp = ((int)targetList[0]->getAbsorption());
 			int percentage = (health / 20) * 100;
 			string displaypercent = to_string(percentage);
@@ -139,7 +137,7 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 			if (showItems && mode.getSelectedValue() == 1) defaultRectHeight = (5, 2) * DrawUtils::getFont(Fonts::SMOOTH)->getLineHeight();
 			string position = "Position: " + to_string((int)floorf(pos->x)) + " " + to_string((int)floorf(pos->y)) + " " + to_string((int)floorf(pos->z));
 			string distance = string(GRAY) + "Distance: " + string(RESET) + to_string((int)dist) + string(".") + to_string((int)(dist * 10) - ((int)dist * 10));
-			string distancev2 =  "Distance: " + string(RESET) + to_string((int)dist) + string(".") + to_string((int)(dist * 10) - ((int)dist * 10)) + "m";
+			string distancev2 = "Distance: " + string(RESET) + to_string((int)dist) + string(".") + to_string((int)(dist * 10) - ((int)dist * 10)) + "m";
 			string targetName = targetList[0]->getNameTag()->getText();
 			targetName = Utils::sanitize(targetName);
 			targetName = targetName.substr(0, targetName.find('\n'));
@@ -275,7 +273,7 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 					rawName = rawName.substr(0, rawName.find('\n'));
 					if (rawName.length() < distance.length()) targetLen = DrawUtils::getTextWidth(&distance, 1) + 10.5;
 					else targetLen = DrawUtils::getTextWidth(&rawName, 1) + 6.5;
-					vec4_t testRect = vec4_t(positionX, positionY, positionX + (targetLen * animationsize), positionY + ((defaultRectHeight) * animationsize));
+					vec4_t testRect = vec4_t(positionX, positionY, positionX + (targetLen * animationsize), positionY + ((defaultRectHeight)*animationsize));
 					DrawUtils::fillRoundRectangle(testRect, MC_Color(0, 0, 0, opacity), true);
 					//DrawUtils::drawRoundRectangle(testRect, interfaceColor, 150);
 					DrawUtils::drawImage("textures/entity/alex.png", vec2_t(positionX + 20 - size2, positionY + 17 - size2), vec2_t(size, size), vec2_t(0.125f, 0.125f), vec2_t(0.125f, 0.125f));
@@ -421,7 +419,7 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 						infoStr += RED;
 					}
 
-					infoStr += string(to_string((int) absorbtion / 2));
+					infoStr += string(to_string((int)absorbtion / 2));
 					infoStr += string(RESET) + " Dist: ";
 					auto killauraMod = moduleMgr->getModule<Killaura>();
 					if (dist <= killauraMod->range) {
@@ -438,7 +436,7 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 					}
 					else if (selfScore < oppenantScore) {
 						winr = RED + string("Losing");
-					} 
+					}
 					else {
 						winr = YELLOW + string("Neutral");
 					}
@@ -477,7 +475,7 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 					DrawUtils::drawText(namePos, &name, MC_Color(255, 255, 255), 1, 1, true);
 				}
 				//hvh
-				if (mode.getSelectedValue() == 10) 
+				if (mode.getSelectedValue() == 10)
 				{
 					auto player = g_Data.getLocalPlayer();
 					int selfScore = entScore(g_Data.getLocalPlayer());
@@ -584,30 +582,6 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 					}
 				}
 
-				if (mode.getSelectedValue() == 11) { // moon
-					float defaultRectHeight = (40, 40);
-					string name = "          ";
-					string rawName = targetList[0]->getNameTag()->getText();
-					rawName = Utils::sanitize(rawName);
-					rawName = name + rawName;
-					rawName = rawName.substr(0, rawName.find('\n'));
-					targetLen = 150.5;
-					vec4_t testRect = vec4_t(positionX - 1, positionY - 1, targetLen + positionX + 1, positionY + defaultRectHeight + 1);
-					DrawUtils::fillRectangleA(testRect, MC_Color(30, 30, 30, opacity));
-					DrawUtils::drawImage("textures/entity/steve.png", vec2_t(positionX, positionY), vec2_t(40, 40), vec2_t(0.125f, 0.125f), vec2_t(0.125f, 0.125f));
-					vec4_t gayRect = vec4_t(testRect.x + 41.5, testRect.y + 35.5, testRect.x + 12, testRect.y + 40.5);
-					DrawUtils::fillRectangleA(gayRect, MC_Color(0, 0, 0, 160));
-					if (Absorbtionhp == 0) {
-						vec4_t healthRect = vec4_t(testRect.x + 42, testRect.y + 36, testRect.x + 42 + ((86.5) / 20) * health, testRect.y + 40);
-						DrawUtils::fillRectangleA(healthRect, MC_Color(255 - healthcolor, healthcolor, 0));
-					}
-
-					if (Absorbtionhp >= 0.1) {
-						vec4_t healthRect = vec4_t(testRect.x + 42, testRect.y + 36, testRect.x + 42 + ((86.5) / 10) * absorbtion, testRect.y + 40);
-						DrawUtils::fillRectangleA(healthRect, MC_Color(200, 200, 10, 255));
-					}
-				}
-
 				if (mode.getSelectedValue() == 1) {
 					if (showItems) defaultRectHeight = (7, 2) * DrawUtils::getFont(Fonts::SMOOTH)->getLineHeight();
 					string name = targetList[0]->getNameTag()->getText();
@@ -659,37 +633,37 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 						if (item->isValid()) DrawUtils::drawItem(item, vec2_t(armorPos), opacity, scale, item->isEnchanted());
 					}
 				}
-				
+
 				if (mode.getSelectedValue() == 10) {
-						string namestr = "Name: ";
-						string namestrv2;
-						if (interface->Fonts.getSelectedValue() == 0) namestrv2 = "       " +  targetName;
-						else namestrv2 = "             " + targetName;
-						vec4_t testRect = vec4_t(positionX, positionY, targetLen + positionX, positionY + defaultRectHeight);
-						vec2_t namePos = vec2_t(testRect.x + 39, testRect.y + 5);
-						vec2_t winrPos = vec2_t(testRect.x + 86, testRect.y + 15);
-						DrawUtils::drawText(winrPos, &distancev2, MC_Color(255, 255, 255), 0.8, 1, true);//dist
-						DrawUtils::drawGradientText(namePos, &namestrv2, 1, 1, true);
-						DrawUtils::drawText(namePos, &namestr, MC_Color(255, 255, 255), 1, 1, true);
-						vec2_t armorPos = vec2_t(testRect.x + 39, testRect.y + 25);
-						if (i->getEntityTypeId() == 319 && showItems) {
-							static float constexpr opacity = 10;
-							float scale = 3 * 0.26f;
-							float spacing = scale + 15.f + 2;
-							auto* player = reinterpret_cast<C_Player*>(targetList[0]);
-							for (int t = 0; t < 4; t++) {
-								C_ItemStack* stack = player->getArmor(t);
-								if (stack->isValid()) {
-									DrawUtils::drawItem(stack, vec2_t(armorPos), 1, scale, false);
-									armorPos.x += scale * spacing;
-								}
+					string namestr = "Name: ";
+					string namestrv2;
+					if (interface->Fonts.getSelectedValue() == 0) namestrv2 = "       " + targetName;
+					else namestrv2 = "             " + targetName;
+					vec4_t testRect = vec4_t(positionX, positionY, targetLen + positionX, positionY + defaultRectHeight);
+					vec2_t namePos = vec2_t(testRect.x + 39, testRect.y + 5);
+					vec2_t winrPos = vec2_t(testRect.x + 86, testRect.y + 15);
+					DrawUtils::drawText(winrPos, &distancev2, MC_Color(255, 255, 255), 0.8, 1, true);//dist
+					DrawUtils::drawGradientText(namePos, &namestrv2, 1, 1, true);
+					DrawUtils::drawText(namePos, &namestr, MC_Color(255, 255, 255), 1, 1, true);
+					vec2_t armorPos = vec2_t(testRect.x + 39, testRect.y + 25);
+					if (i->getEntityTypeId() == 319 && showItems) {
+						static float constexpr opacity = 10;
+						float scale = 3 * 0.26f;
+						float spacing = scale + 15.f + 2;
+						auto* player = reinterpret_cast<C_Player*>(targetList[0]);
+						for (int t = 0; t < 4; t++) {
+							C_ItemStack* stack = player->getArmor(t);
+							if (stack->isValid()) {
+								DrawUtils::drawItem(stack, vec2_t(armorPos), 1, scale, false);
+								armorPos.x += scale * spacing;
 							}
-							C_PlayerInventoryProxy* supplies = player->getSupplies();
-							C_ItemStack* item = supplies->inventory->getItemStack(supplies->selectedHotbarSlot);
-							if (item->isValid()) DrawUtils::drawItem(item, vec2_t(armorPos), opacity, scale, item->isEnchanted());
 						}
+						C_PlayerInventoryProxy* supplies = player->getSupplies();
+						C_ItemStack* item = supplies->inventory->getItemStack(supplies->selectedHotbarSlot);
+						if (item->isValid()) DrawUtils::drawItem(item, vec2_t(armorPos), opacity, scale, item->isEnchanted());
+					}
 				}
-				
+
 				if (mode.getSelectedValue() == 3) {
 					sort(targetList.begin(), targetList.end(), CompareTargetEnArray());
 					float targetLen = DrawUtils::getTextWidth(&targetName, 1) + 35.5;
@@ -723,29 +697,6 @@ void TargetHUD::onPostRender(C_MinecraftUIRenderContext* renderCtx) {
 					float targetLen = DrawUtils::getTextWidth(&targetName, 1) + 35.5;
 					vec4_t testRect = vec4_t(positionX, positionY, targetLen + positionX, positionY + defaultRectHeight - 11.f);
 					DrawUtils::drawText(vec2_t(testRect.x + 40, testRect.y + 15), &targetName, MC_Color(255, 255, 255), 1, 1, true);
-				}
-				if (mode.getSelectedValue() == 11) {
-					std::string absorptionString = std::to_string((int)(Absorbtionhp));
-					string gaytext = string(YELLOW) + absorptionString + string(GRAY) + "/" + string(YELLOW) + "10";
-					string notgaytext = string(GRAY) + "/" + string(GREEN) + "20";
-					string stringhealth = to_string(inthealth);
-					sort(targetList.begin(), targetList.end(), CompareTargetEnArray());
-					string distance = "Dist: " + string(GRAY) + to_string((int)dist) + string(".") + to_string((int)(dist * 10) - ((int)dist * 10)) + string("m");
-					int damageTime = targetList[0]->damageTime;
-					std::string hurtTime = "Hurt:" + string(GRAY) + std::to_string(damageTime);
-					float targetLen = DrawUtils::getTextWidth(&targetName, 1) + 35.5;
-					vec4_t testRect = vec4_t(positionX, positionY, targetLen + positionX, positionY + defaultRectHeight - 11.f);
-					DrawUtils::drawText(vec2_t(testRect.x + 42, testRect.y + 2), &targetName, MC_Color(255, 255, 255), 1, 1, true);
-					DrawUtils::drawText(vec2_t(testRect.x + 42, testRect.y + 11), &distance, MC_Color(255, 255, 255), 0.8, 1, true);
-					DrawUtils::drawText(vec2_t(testRect.x + 42, testRect.y + 19), &hurtTime, MC_Color(255, 255, 255), 0.8, 1, true);
-
-					if (Absorbtionhp == 0) {
-						DrawUtils::drawText(vec2_t(testRect.x + 138, testRect.y + 35), &notgaytext, MC_Color(255, 255, 255), 0.7, 1, true);
-						DrawUtils::drawText(vec2_t(testRect.x + 130, testRect.y + 35), &stringhealth, MC_Color(255 - healthcolor, healthcolor, 0), 0.7, 1, true);
-					}
-					if (Absorbtionhp >= 0.1) {
-						DrawUtils::drawText(vec2_t(testRect.x + 133, testRect.y + 35), &gaytext, MC_Color(255, 255, 255), 0.7, 1, true);
-					}
 				}
 
 				// Old

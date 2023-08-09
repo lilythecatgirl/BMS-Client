@@ -23,7 +23,7 @@ public:
 
 	void setTimerSpeed(float tps) {
 		*this->timer = tps;
-	}
+	};
 	void setRenderTimerSpeed(float tps) {
 		*this->renderTimer = tps;
 	};
@@ -76,35 +76,35 @@ public:
 };
 
 namespace mce {
-class TextureGroup;
-class MaterialPtr;
-class Mesh {
-public:
-	void renderMesh(__int64 screenContext, mce::MaterialPtr* material, size_t numTextures, __int64** textureArray);
+	class TextureGroup;
+	class MaterialPtr;
+	class Mesh {
+	public:
+		void renderMesh(__int64 screenContext, mce::MaterialPtr* material, size_t numTextures, __int64** textureArray);
 
-	template <size_t numTextures>
-	void renderMesh(__int64 screenContext, mce::MaterialPtr* material, std::array<__int64*, numTextures> textures) {
-		this->renderMesh(screenContext, material, numTextures, &textures[0]);
-	}
-};
-class TexturePtr {
-private:
-	__int64* clientTexture;
-	char pad[0x8];
-	ResourceLocation resourceLocation;  // 0x10
+		template <size_t numTextures>
+		void renderMesh(__int64 screenContext, mce::MaterialPtr* material, std::array<__int64*, numTextures> textures) {
+			this->renderMesh(screenContext, material, numTextures, &textures[0]);
+		}
+	};
+	class TexturePtr {
+	private:
+		__int64* clientTexture;
+		char pad[0x8];
+		ResourceLocation resourceLocation;  // 0x10
 
-public:
-	__int64* getClientTexture() {
-		return this->clientTexture;
-	}
-};
-class MaterialPtr {
-private:
-	std::shared_ptr<void> materialPtr;
+	public:
+		__int64* getClientTexture() {
+			return this->clientTexture;
+		}
+	};
+	class MaterialPtr {
+	private:
+		std::shared_ptr<void> materialPtr;
 
-public:
-	MaterialPtr(const std::string& materialName);
-};
+	public:
+		MaterialPtr(const std::string& materialName);
+	};
 }  // namespace mce
 
 class LevelRenderer {
@@ -160,7 +160,7 @@ private:
 	__int64 pad2;                       // 0x0020
 public:
 	C_FontRepository_FontList* fontList;  // 0x0028
-										  // C_FontRepository_FontList* fontList1;  //0x0040
+	// C_FontRepository_FontList* fontList1;  //0x0040
 };
 
 class MinecraftGame {
@@ -302,7 +302,7 @@ private:
 	char pad_0460[0x78];
 public:
 	struct {
-		char pad[0x238]; 
+		char pad[0x238];
 		struct {
 			__int64 materialPtr;
 			size_t refCount;
@@ -814,7 +814,7 @@ private:
 public:
 	virtual void setServerPingTime(unsigned int);
 
-public:
+private:
 	virtual __int64 getServerPingTime(void) const;
 
 public:

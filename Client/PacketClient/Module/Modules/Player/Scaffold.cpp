@@ -31,7 +31,8 @@ Scaffold::Scaffold() : IModule(0, Category::PLAYER, "Places blocks under you") {
 	registerEnumSetting("Select", &holdType, 0);
 	holdType.addEntry("Switch", 0);
 	holdType.addEntry("Spoof", 1);
-	holdType.addEntry("Fake", 2);
+	holdType.addEntry("FakeSpoof", 2);
+	holdType.addEntry("HotbarSpoof", 3);
 	registerEnumSetting("Place", &diagType, 0);
 	diagType.addEntry("None", 0);
 	diagType.addEntry("UnderBlock", 1);
@@ -53,6 +54,7 @@ Scaffold::Scaffold() : IModule(0, Category::PLAYER, "Places blocks under you") {
 	downwards.addEntry("Vanilla", 1);
 	//	registerBoolSetting("AlwaysUnder", &alwaysUnderPlace, alwaysUnderPlace);
 	//registerBoolSetting("Spoof", &spoof, spoof);
+	registerBoolSetting("Swing", &swing, swing);
 	registerFloatSetting("Extend", &extend, extend, 0, 15);
 	registerIntSetting("ExtendDelay", &delay, delay, 0, 5);
 	registerIntSetting("UnderDelay", &underplacedelay, underplacedelay, 0, 5);
@@ -149,6 +151,9 @@ void Scaffold::onEnable() {
 }
 
 void Scaffold::onTick(C_GameMode* gm) {
+	if (holdType.getSelectedValue() == 3) {
+		g_Data.getClientInstance()->minecraft->setRenderTimerSpeed(0.f);
+	}
 	C_GameSettingsInput* input = g_Data.getClientInstance()->getGameSettingsInput();
 	auto player = g_Data.getLocalPlayer();
 	if (player == nullptr) return;
@@ -951,6 +956,7 @@ bool Scaffold::findBlocks(C_ItemStack* itemStack) {
 }
 
 void Scaffold::onDisable() {
+	g_Data.getClientInstance()->minecraft->setRenderTimerSpeed(20.f);
 	g_Data.getClientInstance()->minecraft->setTimerSpeed(20.f);
 	auto sprint = moduleMgr->getModule<Sprint>();
 	auto speedMod = moduleMgr->getModule<Speed>();

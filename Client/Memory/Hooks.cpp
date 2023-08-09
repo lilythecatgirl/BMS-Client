@@ -1160,6 +1160,18 @@ void Hooks::LoopbackPacketSender_sendToServer(C_LoopbackPacketSender* a, C_Packe
 			return;
 	}
 
+	if (scaffold->isEnabled() && scaffold->holdType.getSelectedValue() == 2) {
+		if (packet->isInstanceOf<C_MobEquipmentPacket>()) {
+			if (!scaffold->canspoof)
+			{
+				scaffold->canspoof = true;
+			}
+			else
+				scaffold->canspoof = false;
+				return;
+		}
+	}
+
 	if (noPacket->isEnabled() && g_Data.isInGame())
 		return;
 

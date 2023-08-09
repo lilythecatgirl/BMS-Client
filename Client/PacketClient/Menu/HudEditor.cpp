@@ -113,7 +113,7 @@ void HudEditor::render() {
 		}
 	}
 	DrawUtils::drawText(vec2_t(clickGUIRect.x + 17, clickGUIRect.y + 4), &string("Modules"), MC_Color(255, 255, 255), 1.F, 1.F, true);
-	DrawUtils::drawCenteredString(vec2_t(windowSize.x / 2, windowSize.y / 2 - 20), &string("Actinium Client"), 1.5f, MC_Color(255, 255, 255), true);
+	DrawUtils::drawCenteredString(vec2_t(windowSize.x / 2, windowSize.y / 2 - 20), &string("BMS Client"), 1.5f, MC_Color(255, 255, 255), true);
 	DrawUtils::fillRoundRectangle(clickGUIRect, MC_Color(0, 0, 0, 100), false);
 	DrawUtils::drawRoundRectangle2(clickGUIRect, MC_Color(255, 255, 255));
 

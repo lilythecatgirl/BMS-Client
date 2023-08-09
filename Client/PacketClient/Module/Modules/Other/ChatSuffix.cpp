@@ -19,8 +19,8 @@ void ChatSuffix::onSendPacket(C_Packet* packet) {
 		std::string Sentence;
 		std::string end;
 		int i = random(1, 40);
-		if (i >= 0 && i <= 3) end = " | A C T I N I U M";
-		if (i > 3) end = " | Actinium";
+		if (i >= 0 && i <= 3) end = " | BMS";
+		if (i > 3) end = " | BMS";
 #ifdef _DEBUG
 #endif // _DEBUG
 		std::string start;
