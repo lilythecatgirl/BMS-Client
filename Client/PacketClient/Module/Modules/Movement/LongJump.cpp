@@ -13,7 +13,7 @@ LongJump::LongJump() : IModule(0, Category::MOVEMENT, "A Long Jump") {
 	mode.addEntry("Cubecraft", 3);
 	registerBoolSetting("Damage", &damage, damage);
     registerBoolSetting("WaitDmg", &waitdamage, waitdamage);
-	registerFloatSetting("Height", &height, height, 0.2f, 5.f);
+	registerFloatSetting("Height", &height, height, 0.2f, 10.f);
 	registerFloatSetting("Speed", &speed, speed, 0.5f, 5.f);
 }
 

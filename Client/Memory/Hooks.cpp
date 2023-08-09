@@ -627,7 +627,7 @@ __int64 Hooks::RenderText(__int64 a1, C_MinecraftUIRenderContext* renderCtx) {
 			string fix = gray + "[*] " + string(RESET);
 
 			string changeLog = (gray + bold + string("BMS Client") + ": \n" + RESET +
-				gray + bold + "Release Build 1: \n" + RESET +
+				gray + bold + "Release Build 2: \n" + RESET +
 				gray + bold + "Base Credits \n" + RESET +
 				"Packet \n" +
 				"Deq \n" +
